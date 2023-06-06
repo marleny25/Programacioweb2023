@@ -1,0 +1,114 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    background: #0f3854;
+    background: radial-gradient(ellipse at center, #0a2e38 0%, #000000 70%);
+    background-size: 100%;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.reloj{
+    font-family: 'Share Tech Mono', monospace;
+    color: #ffffff;
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-shadow: 0 0 20px rgba(10,175, 230,1), 0 0 20px rgba(10,175, 230,0) ;
+}
+.tiempo{
+    letter-spacing: 0.05em;
+    font-size: 80px;
+    padding: 5px 0;
+}
+.fecha{
+    letter-spacing: 0.1em;
+    font-size: 24px;
+}
+h2{
+    letter-spacing: 0.1em;
+    font-size: 24px;
+    padding: 5px; 
+    text-align: center;
+    padding-left: 60px;
+}
+.checkbox input {
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+    }
+    input {
+        padding: 5px;
+        margin-bottom: 30px;
+        background: transparent;
+        border: none;
+        border-bottom: solid #eee;
+        text-align: center;
+        width: 100%;
+        }
+
+        input::placeholder {
+            color: #eee ,;
+            }
+
+            .title {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+                }
+                .info {
+                display: flex;
+                flex-direction: column;
+                }
+               
+                
+                .btn-item, button {
+                    padding: 10px 5px;
+                    margin-top: 20px;
+                    border-radius: 5px; 
+                    border: none;
+                    background: #0a2e38; 
+                    text-decoration: none;
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: #fff;
+                    }
+                    .btn-item {
+                    display: inline-block;
+                    margin: 20px 5px 0;
+                    }
+                    button {
+                    width: 100%;
+                    }
+                    button:hover, .btn-item:hover {
+                    background: #85d6de;
+                    }
+                   
+                    img {
+                        border-radius: 8px;
+                        width: 200px;
+                        height: 200px;;
+                      }
+
+                 select{
+                    padding: 10px 5px;
+                    margin-top: 20px;
+                    border-radius: 5px; 
+                    border: none;
+                    background: #0a2e38; 
+                    text-decoration: none;
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: #fff;
+                    width: 100%;
+                    text-align: center;
+                 }
+
+              
