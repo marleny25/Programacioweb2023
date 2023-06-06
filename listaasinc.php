@@ -1,16 +1,19 @@
 <?php
-include_once "conexion.php";
+ require_once 'conexion.php';
 
 $numeroControl = '';
+$fechaInicio = '';
+$fechaFin = '';
 
 if (isset($_POST['buscar'])) {
     $numeroControl = $_POST['numeroControl'];
+    $fechaInicio = $_POST['fechaInicio'];
+    $fechaFin = $_POST['fechaFin'];
+
+    // Consultar las asistencias por número de control y rango de fechas
+    $sql = "SELECT * FROM asistencias WHERE numerocontrolfk = '$numeroControl' AND fecha BETWEEN '$fechaInicio' AND '$fechaFin' ORDER BY fecha";
+    $result = $conn->query($sql);
 }
-
-// Consultar las asistencias por número de control
-$sql = "SELECT * FROM asistencias WHERE numerocontrolfk LIKE '%$numeroControl%' ORDER BY fecha";
-$result = $conn->query($sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +21,7 @@ $result = $conn->query($sql);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Búsqueda de Asistencias por Número de Control</title>
+  <title>Búsqueda de Asistencias</title>
   <!-- Estilos CSS -->
   <style>
     table {
@@ -26,40 +29,42 @@ $result = $conn->query($sql);
       width: 100%;
     }
     th, td {
-      border: 2px solid black;
+      border: 1px solid black;
       padding: 8px;
       text-align: left;
     }
   </style>
 </head>
-<body style="background-color: darkgrey;">
+<body>
 <?php include "nav.php"; ?>
-<div class="container">
-<h1 class="mt-3 text-center">Búsqueda de Asistencias por Número de Control</h1>
+  <div class="container">
+  <h1>Búsqueda de Asistencias</h1>
   <form method="POST" action="">
     <label for="numeroControl">Número de Control:</label>
-    <input type="text" name="numeroControl" value="<?php echo $numeroControl; ?>" >
-    <button type="submit" name="buscar" style="background-color: aqua;">Buscar</button>
+    <input type="text" name="numeroControl" value="<?php echo $numeroControl; ?>">
+    <br>
+    <label for="fechaInicio">Fecha de Inicio:</label>
+    <input type="date" name="fechaInicio" value="<?php echo $fechaInicio; ?>">
+    <br>
+    <label for="fechaFin">Fecha de Fin:</label>
+    <input type="date" name="fechaFin" value="<?php echo $fechaFin; ?>">
+    <br>
+    <button type="submit" name="buscar">Buscar</button>
   </form>
-  <br>
-  <table>
-    <tr>
-      <th>ID Asistencias</th>
-      <th>Número de Control</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>In/Out</th>
-    </tr>
-    <?php
-    // Mostrar los resultados en la tabla
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $row['idAsistencias'] . "</td>";
-            echo "<td>" . $row['numerocontrolfk'] . "</td>";
-            echo "<td>" . $row['fecha'] . "</td>";
-            echo "<td>" . $row['hora'] . "</td>";
-            echo "<td>" . $row['inoutt'] . "</td>";
+  <table >
+  <?php
+  // Mostrar la tabla de resultados si se realizó la búsqueda
+  if (isset($_POST['buscar']) && $result->num_rows > 0) {
+      echo "<h2>Resultados de la búsqueda:</h2>";
+      echo "<table>";
+      echo "<tr><th>ID Asistencias</th><th>Número de Control</th><th>Fecha</th><th>Hora</th><th>In/Out</th></tr>";
+      while ($row = $result->fetch_assoc()) {
+          echo "<tr>";
+          echo "<td>" . $row['idAsistencias'] . "</td>";
+          echo "<td>" . $row['numerocontrolfk'] . "</td>";
+          echo "<td>" . $row['fecha'] . "</td>";
+          echo "<td>" . $row['hora'] . "</td>";
+          echo "<td>" . $row['inoutt'] . "</td";
             echo "</tr>";
         }
     } else {
